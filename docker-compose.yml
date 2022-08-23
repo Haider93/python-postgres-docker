@@ -1,0 +1,10 @@
+services:
+  python-app :
+    build: python-app
+    # image: python-app:latest
+    ports:
+      - "8080:8080"
+    depends_on: 
+    - database
+  database:
+    build: postgres-app
