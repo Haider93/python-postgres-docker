@@ -126,6 +126,21 @@ class TestServer():
             return cherrypy.HTTPError(e, str(e))
 
     @cherrypy.expose
+    def get_user_posts(self, id):
+        pass
+
+    @cherrypy.expose
+    def get_post_user(self, id):
+        try:
+            sql_query = f'select * from post where user_id={id};'
+            cursor.execute(sql_query)
+            output = cursor.fetchall()
+            output = convert_to_json(output)
+            return json.dumps(output)
+        except Exception as e:
+            return cherrypy.HTTPError(e, str(e))
+
+    @cherrypy.expose
     def delete_post(self, id):
         try:
             sql_query = "delete from post where post_id = %s"
